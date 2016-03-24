@@ -1,0 +1,6 @@
+queeg.cs.rit.edu
+iowa.cs.rit.edu
+alabama.cs.rit.edu
+georgia.cs.rit.edu
+california.cs.rit.edu
+glados.cs.rit.edu
