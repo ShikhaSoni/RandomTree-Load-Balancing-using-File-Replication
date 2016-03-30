@@ -4,6 +4,7 @@
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -73,7 +74,6 @@ public class Server extends UnicastRemoteObject implements FileTransfer {
 						level - 1, child_2));
 				filetransfer_1 = get_remote_object(child_server_2);
 				childCopy(filename, filetransfer_1);
-
 			}
 		} else {
 			// if I dont have it, calculate the parent
@@ -138,7 +138,9 @@ public class Server extends UnicastRemoteObject implements FileTransfer {
 			throws RemoteException {
 		try {
 			System.out.println("Received file: " + filename);
-			BufferedReader reader = new BufferedReader(new FileReader(
+			FileInputStream fis = new FileInputStream(fileobject);
+			
+			/*BufferedReader reader = new BufferedReader(new FileReader(
 					fileobject));
 			PrintWriter writer = new PrintWriter(
 					new File(filename + "Copy.txt"));
@@ -149,7 +151,7 @@ public class Server extends UnicastRemoteObject implements FileTransfer {
 			}
 			reader.close();
 			writer.close();
-			file_add(filename);
+			file_add(filename);*/
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -177,6 +179,7 @@ public class Server extends UnicastRemoteObject implements FileTransfer {
 	 */
 	public int hash_value(String filename, int level, int root_num) {
 		int server_num = filename.hashCode() + level + root_num;
+		//System.out.println(servers.size() + "_____________");
 		return Math.abs(server_num % servers.size());
 	}
 
